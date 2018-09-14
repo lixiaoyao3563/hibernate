@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    
+    	<property name="connection.username">root</property>
+    	<property name="connection.password">root</property>
+    	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    	<property name="connection.url">jdbc:mysql://localhost:3306/hibernate</property>
+    	
+    	<!-- <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property> -->
+    	<!--在mysql 5.0版本以后不支持 type=InnoDB 关键字, MySQLInnoDBDialect，改为MySQL5Dialect即可-->
+    	<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+    	
+    	<property name="show_sql">true</property>
+    	<property name="format_sql">true</property>
+    	<property name="hbm2ddl.auto">update</property>
+    	
+    	
+    	<property name="hibernate.c3p0.max_size">10</property>
+    	<property name="hibernate.c3p0.min_size">5</property>
+    	<property name="hibernate.c3p0.acquire_increment">2</property>
+    	<property name="hibernate.c3p0.timeout">2000</property>
+    	<property name="hibernate.c3p0.idle_test_period">2000</property>
+    	<property name="hibernate.c3p0.max_statements">10</property>
+    	
+    	
+    	<!-- 启用二级缓存 -->
+		<property name="cache.use_second_level_cache">true</property>
+    	
+    	<!-- 配置使用的二级缓存的产品 -->
+    	<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+    	
+    	<!-- 配置启用查询缓存 -->
+    	<property name="cache.use_query_cache">true</property>
+    	
+    	<!-- 配置管理 Session 的方式 -->
+    	<property name="current_session_context_class">thread</property>
+    	
+    	
+    	
+    	
+    	<mapping resource="com/lxy/hibernate/entities/News.hbm.xml"/>
+    	<mapping resource="com/lxy/hibernate/entities/Person.hbm.xml"/>
+    
+    	<class-cache usage="read-write" class="com.lxy.hibernate.entities.News"/>
+    
+    </session-factory>
+</hibernate-configuration>
